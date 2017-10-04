@@ -1,0 +1,246 @@
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+    display: none !important;
+}
+
+html {
+    height: 100%;
+}
+
+[ng-view] {
+    height:100%;
+}
+
+.spk-split-pane {
+    height: 100%;
+}
+
+.spk-split-pane > .spk-split-pane-left {
+    position: absolute;
+    bottom: 0px;
+    top: 0px;
+    overflow-y: scroll;
+    right: 0px;
+    left: 0px;
+    padding-right: 15px;
+    padding-top: 10px;
+}
+
+.spk-split-pane > .spk-split-pane-right {
+    position: absolute;
+    right: 0px;
+    bottom: 0px;
+    top: 0px;
+    overflow-y: scroll;
+    padding-top: 10px;
+}
+
+input[type=checkbox] {
+    margin-right: 10px;
+}
+body {
+    padding-top: 60px;
+    padding-bottom: 60px;
+    height: 100%;
+}
+.form-control, .btn-block {
+    margin-bottom: 10px;
+}
+
+.list-group-item .btn {
+    margin-bottom: 0px;
+}
+
+.navbar * {
+    color: white;
+}
+
+.navbar-inverse .navbar-brand {
+    color: white;
+}
+
+.navbar-inverse .navbar-nav>li>a {
+    color: white;
+}
+
+.search-language {
+    font-size: 1em !important;
+    height: 55px;
+    text-align: left;
+}
+.faces {
+    float: left;
+    width: 40px;
+    overflow: hidden;
+    height: 40px;
+    text-align: center;
+    margin-right: 10px;
+    margin-top: -5px;
+    margin-left: -10px;
+}
+.faces img {
+    height: 40px;
+    border-radius: 20px;
+}
+
+.height-60px {
+    height: 60px;
+}
+
+/*
+select, input, button {
+    height: 3em !important;
+}
+
+a.btn {
+    font-size: 2em;
+}
+*/
+
+.spk-yellow {
+    color: #ffcc00;
+}
+
+.spk-rating-number {
+    /*float: right;*/
+    margin-left: 10px;
+}
+
+.spk-rating-star {
+    /*float: right;*/
+    color: #ffcc00;
+}
+
+.spk-text-justified {
+    text-align: justify;
+}
+
+.spk-navbar-back-button {
+    color: white !important;
+    margin-right: 5px;
+}
+
+.spk-no-margin-top {
+    margin-top: 0px;
+}
+
+.navbar-fixed-bottom .navbar-text {
+     margin-right: 0px;
+     margin-left:  0px;
+}
+
+input[type=checkbox] {
+    height: auto !important;
+}
+
+.margin-bottom-10px {
+    margin-bottom: 10px;
+}
+
+.navbar-brand {
+    text-transform: capitalize;
+}
+
+.list-group-item.active .glyphicon,
+.list-group-item.active a,
+.panel-heading a .glyphicon {
+    color: white;
+}
+
+.navbar-header button {
+    height: auto !important;
+}
+
+video {
+    width: 100%;
+}
+
+span.lang-learn {
+    display: inline-block;
+}
+
+.spk-selected-word {
+    background-color: yellow;
+}
+
+.list-group-item .form-control {
+    margin-bottom: 0px !important;
+}
+
+.spk-avatar {
+    font-size: 20em;
+    width: 100%;
+    text-align: center;
+    border-radius: 5px;
+    border: 1px solid black;
+    margin-bottom: 10px;
+    padding: 10px;
+}
+
+rating {
+    text-align: left;
+}
+
+.navbar-header button.navbar-toggle {
+    max-width: 80px;
+    overflow: hidden;
+}
+
+.spk-input-field-icon {
+    float: right;
+    position: relative;
+    top: -25px;
+    right: 10px;
+}
+
+.spk-nudge-left-10px {
+    margin-right: 10px;
+}
+
+.fa.inactive {
+    color: lightgray;
+}
+.fa.active
+{
+    color: #2b669a;
+}
+
+.spk-remote-media-coach {
+    position: fixed;
+    bottom: 56px;
+    right: 5px;
+    width: 50%;
+    z-index: 100;
+    border: 10px solid white;
+}
+
+.spk-session-timer {
+    position: fixed;
+    color: white;
+    z-index: 10000;
+    top: 7px;
+    left: 35%;
+    text-shadow: aliceblue;
+    font-size: 2em;
+}
+
+.spk-share-logo {
+    background: #2b669a;
+    color: white !important;
+    border-radius: 10px;
+    font-size: 4em;
+    font-family: arial;
+    font-weight: 800;
+    height: 60px;
+    padding: 0px;
+    margin: 0px;
+    position: relative;
+    top: -8px;
+}
+
+.spk-share-logo:before {
+    content: "sa";
+}
+
+.spk-align-left {
+    text-align: left;
+}

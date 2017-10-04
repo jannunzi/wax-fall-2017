@@ -1,0 +1,47 @@
+(function () {
+    angular
+        .module("<%= applicationName %>")
+<%      var entity = entities[entityName];
+        var uppercaseSingularEntityLabel = entity.view.labels.singular.uppercase;
+        var lowercaseSingularEntityLabel = entity.view.labels.singular.lowercase;
+        var uppercasePluralEntityLabel = entity.view.labels.plural.uppercase;
+        var lowercasePluralEntityLabel = entity.view.labels.plural.lowercase;
+-%>
+        .service("wax<%= uppercaseSingularEntityLabel %>Service", wax<%= uppercaseSingularEntityLabel %>Service);
+
+    function wax<%= uppercaseSingularEntityLabel %>Service($http) {
+        this.create<%= uppercaseSingularEntityLabel %> = create<%= uppercaseSingularEntityLabel %>;
+        this.findAll<%= uppercasePluralEntityLabel %> = findAll<%= uppercasePluralEntityLabel %>;
+        this.find<%= uppercaseSingularEntityLabel %>ById = find<%= uppercaseSingularEntityLabel %>ById;
+        this.update<%= uppercaseSingularEntityLabel %> = update<%= uppercaseSingularEntityLabel %>;
+        this.delete<%= uppercaseSingularEntityLabel %> = delete<%= uppercaseSingularEntityLabel %>;
+
+        function create<%= uppercaseSingularEntityLabel %>(<%= lowercaseSingularEntityLabel %>) {
+            var url = "/wax/api/<%= lowercaseSingularEntityLabel %>";
+            return $http.post(url, <%= lowercaseSingularEntityLabel %>)
+                then(function(response){
+                    return response.data;
+                });
+        }
+        function findAll<%= uppercasePluralEntityLabel %>() {
+            var url = "/wax/api/<%= lowercaseSingularEntityLabel %>";
+            return $http.get(url)
+                then(function(response){
+                    return response.data;
+                });
+        }
+        function find<%= uppercaseSingularEntityLabel %>ById(<%= lowercaseSingularEntityLabel %>Id) {
+            var url = "/wax/api/<%= lowercaseSingularEntityLabel %>/" + <%= lowercaseSingularEntityLabel %>Id;
+            return $http.get(url)
+                then(function(response){
+                    return response.data;
+                });
+        }
+        function update<%= uppercaseSingularEntityLabel %>() {
+
+        }
+        function delete<%= uppercaseSingularEntityLabel %>() {
+
+        }
+    }
+})();

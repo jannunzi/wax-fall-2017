@@ -1,0 +1,38 @@
+<%  var entity = entities[entityName];
+    var uppercaseSingularEntityLabel = entity.view.labels.singular.uppercase;
+    var uppercasePluralEntityLabel = entity.view.labels.plural.uppercase;
+    var lowercaseSingularEntityLabel = entity.view.labels.singular.lowercase;
+    var lowercasePluralEntityLabel = entity.view.labels.plural.lowercase;
+%>
+<br/>
+<div class="container-fluid">
+    <ul class="list-group">
+        <li class="list-group-item active">
+            <a style="color:white;" href="#!/wax/entity/<%= lowercaseSingularEntityLabel %>/new" class="pull-right">
+                <span class="glyphicon glyphicon-plus"></span>
+            </a>
+            <%= uppercasePluralEntityLabel %>
+        </li>
+        <li ng-repeat="<%= entityName %> in model.<%= entityName %>s" class="list-group-item">
+            <div class="row">
+<%  for(var fieldName in entity.view.fields) {
+        var field = entity.view.fields[fieldName];
+
+        if(field.hidden) {
+            continue;
+        }
+        var fieldColumns = field.columns;
+%>
+                <div class="col-xs-<%= fieldColumns %>">
+                    {{<%= entityName %>.<%= fieldName %>}}
+                </div>
+<%  }
+%>              <div class="col-xs-2">
+                    <a href="#!/wax/entity/<%= lowercaseSingularEntityLabel %>/{{<%= entityName %>._id}}" class="pull-right">
+                        <span class="glyphicon glyphicon-cog"></span>
+                    </a>
+                </div>
+            </div>
+        </li>
+    </ul>
+</div>

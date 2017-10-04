@@ -1,0 +1,4 @@
+<label><%= widget.label %></label>
+<input ng-model="model.<%= widget.name ? pageName+'.'+widget.name : '' %>"
+       placeholder="<%= widget.placeholder ? widget.placeholder : '' %>"
+       class="form-control">

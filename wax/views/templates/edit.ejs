@@ -1,0 +1,63 @@
+<%  var entity = entities[entityName];
+    var uppercaseSingularEntityLabel = entity.view.labels.singular.uppercase;
+    var lowercaseSingularEntityLabel = entity.view.labels.singular.lowercase;
+    var uppercasePluralEntityLabel = entity.view.labels.plural.uppercase;
+    var lowercasePluralEntityLabel = entity.view.labels.plural.lowercase;
+    var service = "wax"+uppercaseSingularEntityLabel+"Service";
+%>
+
+<br/>
+<div class="container-fluid">
+    <ul class="list-group">
+        <li class="list-group-item active">
+            <a href="#!/wax/entity/<%= entityName %>" class="pull-left" style="color: #fff;">
+                <span class="glyphicon glyphicon-chevron-left"></span>
+            </a>
+            <%= entityName %>
+            <a ng-click="model.create<%= uppercaseSingularEntityLabel %>(model.<%= lowercaseSingularEntityLabel %>)" style="color: #fff;">
+                <span class="glyphicon glyphicon-ok"></span>
+            </a>
+        </li>
+<%  for(var fieldName in entity.view.fields) {
+        var field = entity.view.fields[fieldName];
+
+        var fieldUppercaseSingularLabel = field.labels ? field.labels.singular.uppercase : fieldName;
+
+        if(field.hidden) {
+            continue;
+        }
+%>
+        <li class="list-group-item">
+            <label for="<%= fieldName %>">
+                <%= fieldUppercaseSingularLabel %>
+            </label>
+<%      if(!field.type || field.type === "text") {
+-%>
+            <input id="<%= fieldName %>"
+                   ng-model="model.<%= lowercaseSingularEntityLabel %>.<%= fieldName %>"
+                   type="text"
+                   placeholder="<%= field.placeholder %>"
+                   class="form-control"/>
+<%      } else if(field.type === "textarea") {
+-%>
+            <textarea id="<%= fieldName %>"
+                      ng-model="model.<%= lowercaseSingularEntityLabel %>.<%= fieldName %>"
+                      rows="<%= field.rows ? field.rows : 5 %>"
+                      placeholder="<%= field.placeholder %>"
+                      class="form-control"></textarea>
+<%      } else if(field.type === "formatted") {
+-%>
+            <text-angular ta-toolbar="[['h1', 'h2', 'h3', 'p'], ['bold', 'italics', 'underline', 'strikeThrough', 'ul', 'ol']]"
+                          ng-model="model.<%= lowercaseSingularEntityLabel %>.<%= fieldName %>"></text-angular>
+<%      }
+-%>
+        </li>
+<%  }
+%>
+    </ul>
+
+    {{model.<%= lowercaseSingularEntityLabel %>}}
+
+</div>
+
+

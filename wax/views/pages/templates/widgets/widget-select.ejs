@@ -1,0 +1,11 @@
+<label><%= widget.label %></label>
+<select ng-model="model.<%= widget.name ? pageName+'.'+widget.name : '' %>"
+        class="form-control">
+    <%          for(var o in widget.options) {
+        var option = widget.options[o];
+    %>              <option <%= option.selected ? 'selected' : '' %>
+            value="<%= option.value %>">
+        <%= option.label %>
+    </option>
+    <%          }
+    %>          </select>

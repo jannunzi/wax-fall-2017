@@ -1,0 +1,91 @@
+(function () {
+    angular
+        .module("<%= applicationName %>")
+        .controller("<%= pageName %>Controller", <%= pageName %>Controller);
+    
+    function <%= pageName %>Controller($routeParams, wax<%= pageName %>Service, $location) {
+        var model = this;
+        model.hello = "Hello from <%= pageName %>Controller()";
+        model.<%= pageName %>Id = $routeParams.<%= pageName %>Id;
+        model.create<%= pageName %> = create<%= pageName %>;
+        model.update<%= pageName %> = update<%= pageName %>;
+        model.delete<%= pageName %> = delete<%= pageName %>;
+<%  if(page.handlers) {
+        for(var h in page.handlers) {
+            var handler = page.handlers[h];
+-%>
+        model.<%=handler.name%> = <%=handler.name%>;
+<%
+        }
+    }
+%>
+        function init() {
+            if( model.<%= pageName %>Id &&
+                model.<%= pageName %>Id !== "new") {
+                find<%= pageName %>ById(model.<%= pageName %>Id);
+            } else {
+
+            }
+        }
+        init();
+
+<%  if(page.handlers) {
+        for(var h in page.handlers) {
+            var handler = page.handlers[h];
+-%>
+        function <%=handler.name%>(<%
+            for(var p in handler.parameters) {-%>
+<%=handler.parameters[p]%><%if(p<handler.parameters.length-1){%>, <%}}-%>) {
+<%          for(var s in handler.satements) {
+                var statement = handler.statements[s];-%>
+                <%= statement %>;
+<%
+}
+%>
+        }
+
+<%
+        }
+}
+-%>
+
+
+        function find<%= pageName %>ById(<%= pageName %>Id) {
+            wax<%= pageName %>Service
+                .find<%= pageName %>ById(model.<%= pageName %>Id)
+                .then(function(<%= pageName %>) {
+                    model.<%= pageName %> = <%= pageName %>;
+                }, function(error){
+                    model.error = error.statusText;
+                });
+        }
+
+        function create<%= pageName %>(<%= pageName %>) {
+            wax<%= pageName %>Service
+                .create<%= pageName %>(<%= pageName %>)
+                .then(function(<%= pageName %>){
+                    $location.url("/wax/page/<%= pageName %>");
+                }, function(error){
+                    model.error = error.statusText;
+                });
+        }
+        function update<%= pageName %>(<%= pageName %>) {
+            wax<%= pageName %>Service
+                .update<%= pageName %>(model.<%= pageName %>Id, <%= pageName %>)
+                .then(function(status){
+                    $location.url("/wax/page/<%= pageName %>");
+                }, function(error){
+                    model.error = error.statusText;
+                });
+        }
+        function delete<%= pageName %>(<%= pageName %>Id) {
+            wax<%= pageName %>Service
+                .delete<%= pageName %>(model.<%= pageName %>Id)
+                .then(function(status){
+                    $location.url("/wax/page/<%= pageName %>");
+                }, function(error){
+                    model.error = error.statusText;
+                });
+        }
+}
+})();

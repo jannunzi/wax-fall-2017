@@ -1,0 +1,29 @@
+<%  var entity = entities[entityName];
+    var uppercaseSingularEntityLabel = entity.view.labels.singular.uppercase;
+    var lowercaseSingularEntityLabel = entity.view.labels.singular.lowercase;
+    var uppercasePluralEntityLabel = entity.view.labels.plural.uppercase;
+    var lowercasePluralEntityLabel = entity.view.labels.plural.lowercase;
+%>
+(function () {
+    angular
+        .module("<%= applicationName %>")
+        .controller("wax<%= uppercaseSingularEntityLabel %>ListController", wax<%= uppercaseSingularEntityLabel %>ListController);
+
+    function wax<%= uppercaseSingularEntityLabel %>ListController(wax<%= uppercaseSingularEntityLabel %>Service) {
+        var model = this;
+        model.hello = "hello from wax<%= uppercaseSingularEntityLabel %>ListController";
+
+        function init() {
+            findAll<%= uppercasePluralEntityLabel %>();
+        }
+        init();
+
+        function findAll<%= uppercasePluralEntityLabel %>() {
+            wax<%= uppercaseSingularEntityLabel %>Service
+                .findAll<%= uppercasePluralEntityLabel %>()
+                .then(function (<%= lowercasePluralEntityLabel %>) {
+                    model.<%= lowercasePluralEntityLabel %> = <%= lowercasePluralEntityLabel %>.data;
+                });
+        }
+    }
+})();

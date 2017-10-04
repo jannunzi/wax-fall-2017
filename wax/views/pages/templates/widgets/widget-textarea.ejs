@@ -1,0 +1,6 @@
+<div>
+    <label><%= widget.label %></label>
+    <textarea ng-model="model.<%= widget.name ? pageName+'.'+widget.name : '' %>"
+              placeholder="<%= widget.placeholder ? widget.placeholder : '' %>"
+              class="form-control"></textarea>
+</div>

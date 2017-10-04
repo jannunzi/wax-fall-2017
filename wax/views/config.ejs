@@ -1,0 +1,47 @@
+(function() {
+    angular
+        .module("<%= applicationName %>")
+        .config(configuration);
+    
+    function configuration($routeProvider) {
+        $routeProvider
+<%  for(var pageName in pages) {
+        var page = pages[pageName];
+        var pageRoute = page.route;
+-%>
+            .when("/wax/page/<%= pageRoute %>/:<%=pageName%>Id", {
+                templateUrl: "/wax/page/<%= pageName %>/templates/<%= pageName %>.controller.client.html",
+                controller: "<%= pageName %>Controller",
+                controllerAs: "model"
+            })
+            .when("/wax/page/<%= pageRoute %>", {
+                templateUrl: "/wax/page/<%= pageName %>/templates/<%= pageName %>.controller.client.html",
+                controller: "<%= pageName %>Controller",
+                controllerAs: "model"
+            })
+<%  }
+    for(var entityName in entities) {
+        var entity = entities[entityName];
+        var uppercaseSingularEntityLabel = entity.view.labels.singular.uppercase;
+        var lowercaseSingularEntityLabel = entity.view.labels.singular.lowercase;
+-%>
+            .when("/wax/entity/<%= entityName %>", {
+                templateUrl: "/wax/entity/<%= entityName %>/templates/list/<%= lowercaseSingularEntityLabel %>-list.view.client.html",
+                controller: "wax<%= uppercaseSingularEntityLabel %>ListController",
+                controllerAs: "model"
+            })
+            .when("/wax/entity/<%= entityName %>/:<%= entityName %>Id", {
+                templateUrl: "/wax/entity/<%= entityName %>/templates/edit/<%= lowercaseSingularEntityLabel %>-edit.view.client.html",
+                controller: "wax<%= uppercaseSingularEntityLabel %>EditController",
+                controllerAs: "model"
+            })
+<%      if(entity.default) {
+-%>
+            .otherwise({
+                redirectTo: "/wax/entity/<%= entityName %>"
+            })
+<%      }
+    }
+-%>
+    }
+})();

@@ -1,0 +1,65 @@
+<br/>
+<div class="container-fluid">
+    <div ng-show="model.error" class="alert alert-danger">
+        {{model.error}}
+    </div>
+<%  for(var w in widgets) {
+        var widget = widgets[w];
+        if(widget.type === "heading") {
+%>          <h<%=widget.size%>>
+                <%=widget.text%>
+            </h<%=widget.size%>>
+<%      } else if(widget.type === "button") {
+%>          <button class="btn btn-block btn-default">
+                <%=widget.label%>
+            </button>
+<%      } else if(widget.type === "image") {
+%>          <img src="<%= widget.url %>"
+                 width="<%= widget.width ? widget.width : '' %>"
+                 height="<%= widget.height ? widget.height : '' %>"/>
+<%      } else if(widget.type === "list") {
+%>          <label><%= widget.label %></label>
+            <ul class="list-group">
+<%          for(var i in widget.items) {
+%>                <li class="list-group-item"><%= widget.items[i] %></li>
+<%          }
+%>          </ul>
+<%      } else if(widget.type === "html") {
+%>          <div>
+                <%- widget.html %>
+            </div>
+<%      } else if(widget.type === "formatted") {
+%>          <div>
+            <label><%= widget.label %></label>
+            <text-angular ng-model="model.<%= widget.name ? pageName+'.'+widget.name : '' %>"
+                          ta-toolbar="[['bold', 'italics', 'underline', 'strikeThrough', 'ul', 'ol']]"
+                          placeholder="<%= widget.placeholder ? widget.placeholder : '' %>"></text-angular>
+            </div>
+<%      } else if(widget.type === "textarea") {
+%>          <div>
+            <label><%= widget.label %></label>
+            <textarea ng-model="model.<%= widget.name ? pageName+'.'+widget.name : '' %>"
+                      placeholder="<%= widget.placeholder ? widget.placeholder : '' %>"
+                      class="form-control"></textarea>
+            </div>
+<%      } else if(widget.type === "input") {
+%>          <label><%= widget.label %></label>
+            <input ng-model="model.<%= widget.name ? pageName+'.'+widget.name : '' %>"
+                   placeholder="<%= widget.placeholder ? widget.placeholder : '' %>"
+                   class="form-control">
+<%      } else if(widget.type === "select") {
+%>          <label><%= widget.label %></label>
+            <select ng-model="model.<%= widget.name ? pageName+'.'+widget.name : '' %>"
+                    class="form-control">
+<%          for(var o in widget.options) {
+                var option = widget.options[o];
+%>              <option <%= option.selected ? 'selected' : '' %>
+                        value="<%= option.value %>">
+                    <%= option.label %>
+                </option>
+<%          }
+%>          </select>
+<%      }
+    }
+%>
+</div>

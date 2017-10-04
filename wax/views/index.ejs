@@ -1,0 +1,35 @@
+<html ng-app="<%= applicationName %>">
+    <head>
+        <link href="/wax/static/vendor/css/bootstrap.css" rel="stylesheet"/>
+        <link href="/wax/static/vendor/css/font-awesome.min.css" rel="stylesheet"/>
+        <script src="/wax/static/vendor/angular/angular.min.js"></script>
+        <script src="/wax/static/vendor/angular/angular-route.min.js"></script>
+        <link href="/wax/static/vendor/textangular/textAngular.css" rel="stylesheet"/>
+        <script src="/wax/static/vendor/textangular/textAngular-rangy.min.js"></script>
+        <script src="/wax/static/vendor/textangular/textAngular-sanitize.min.js"></script>
+        <script src="/wax/static/vendor/textangular/textAngular.min.js"></script>
+
+        <script src="/wax/app.js"></script>
+        <script src="/wax/config.js"></script>
+
+
+<%  for(var pageName in pages) {
+        var page = pages[pageName];
+-%>
+        <script src="/wax/page/<%= pageName %>/controllers/<%= pageName %>.controller.client.js"></script>
+        <script src="/wax/page/<%= pageName %>/service/<%= pageName %>.service.client.js"></script>
+<%  }
+    for(var entityName in entities) {
+        var entity = entities[entityName];
+        var lowercaseSingularEntityLabel = entity.view.labels.singular.lowercase;
+-%>
+        <script src="/wax/entity/<%= lowercaseSingularEntityLabel %>/controllers/list/<%= lowercaseSingularEntityLabel %>-list.controller.client.js"></script>
+        <script src="/wax/entity/<%= lowercaseSingularEntityLabel %>/controllers/edit/<%= lowercaseSingularEntityLabel %>-edit.controller.client.js"></script>
+        <script src="/wax/entity/<%= lowercaseSingularEntityLabel %>/service/<%= lowercaseSingularEntityLabel %>.service.client.js"></script>
+<%  }
+-%>
+    </head>
+    <body>
+        <div ng-view></div>
+    </body>
+</html>

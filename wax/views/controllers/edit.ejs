@@ -1,0 +1,46 @@
+<%  var entity = entities[entityName];
+    var uppercaseSingularEntityLabel = entity.view.labels.singular.uppercase;
+    var lowercaseSingularEntityLabel = entity.view.labels.singular.lowercase;
+    var uppercasePluralEntityLabel = entity.view.labels.plural.uppercase;
+    var lowercasePluralEntityLabel = entity.view.labels.plural.lowercase;
+    var service = "wax"+uppercaseSingularEntityLabel+"Service";
+%>
+(function () {
+    angular
+        .module("<%= applicationName %>")
+        .controller("wax<%= uppercaseSingularEntityLabel %>EditController", wax<%= uppercaseSingularEntityLabel %>EditController);
+
+    function wax<%= uppercaseSingularEntityLabel %>EditController(<%= service %>, $routeParams, $location) {
+        var model = this;
+
+        model.<%= entityName %>Id = $routeParams.<%= entityName %>Id;
+
+        model.create<%= uppercaseSingularEntityLabel %> = create<%= uppercaseSingularEntityLabel %>;
+
+        function init() {
+            if(model.<%= entityName %>Id !== 'new') {
+                find<%= uppercaseSingularEntityLabel %>ById(model.<%= entityName %>Id);
+            }
+        }
+        init();
+
+        function find<%= uppercaseSingularEntityLabel %>ById(<%= entityName %>Id) {
+            <%= service %>
+                .find<%= uppercaseSingularEntityLabel %>ById(<%= entityName %>Id)
+                .then(function(<%= lowercaseSingularEntityLabel %>) {
+                    model.<%= lowercaseSingularEntityLabel %> = <%= lowercaseSingularEntityLabel %>.data;
+                });
+        }
+
+        function create<%= uppercaseSingularEntityLabel %>(<%=lowercaseSingularEntityLabel%>) {
+            // alert('create');
+//            console.log(<%=lowercaseSingularEntityLabel%>);
+            <%= service %>
+                .create<%= uppercaseSingularEntityLabel %>(<%=lowercaseSingularEntityLabel%>)
+                .then(function(response) {
+                    $location.url('/wax/entity/' + <%=lowercaseSingularEntityLabel%>);
+                });
+        }
+
+    }
+})();
