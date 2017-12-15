@@ -1,5 +1,5 @@
 {
-  "applicationName": "SampleApp",
+  "applicationName": "speakApp",
   "connectionString": "localhost:27017",
   "databaseName": "speak-app",
   "scripts": {
@@ -12,6 +12,15 @@
     }
   },
   "pages": {
+    "page1": {
+      "route": "page123",
+      "widgets": [
+        {
+          "type": "html",
+          "html": "<p>Hello from speakApp</p>"
+        }
+      ]
+    },
     "test": {
       "route": "test",
       "handlers": [

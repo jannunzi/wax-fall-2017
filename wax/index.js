@@ -7,17 +7,17 @@ var application = null;
 
 module.exports = function (_app, _application) {
 
-    var model = require("./model/model")(_application);
+    var model;// = require("./model/model")(_application);
+    application = _application;
+    var applicationModel = require('./model/application.model.server');
 
     app = _app;
     app.set('view engine', 'ejs');
 
-    application = _application;
-
     app.set('views', path.join(__dirname, '/views'));
 
     app.get('/wax/test', test);
-    app.get('/wax/index.html', index);
+    app.get('/wax/:appname/index.html', index);
     app.get('/wax/vendor/*', vendor);
     app.get('/wax/app.js', appJs);
     app.get('/wax/config.js', configJs);
@@ -144,10 +144,20 @@ module.exports = function (_app, _application) {
     }
 
     function index(req, res) {
-        var data = {};
-        console.log(req.params);
-        Object.assign(data, application, req.params);
-        res.render('index', data);
+        var applicationName = req.params["appname"];
+        applicationModel.findApplicationByName(applicationName)
+            .then(function (theApp) {
+                if(theApp) {
+                    application = theApp.toObject();
+                } else {
+                    application = require('../applications/'+applicationName+'.json');
+                }
+                // model = require("./model/model")(application);
+                var data = {};
+                Object.assign(data, application, req.params);
+                res.render('index', data);
+            }, function(){
+            });
     }
 
     function vendor(req, res) {

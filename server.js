@@ -7,8 +7,12 @@ app.get('/hello', function (req, res) {
     res.send('Hello');
 });
 
-var application = require('./speakApp.json');
+var mongoose = require('mongoose');
+mongoose.connect('mongodb://localhost/wax_ide', { useMongoClient: true });
+mongoose.Promise = global.Promise;
+
+// var application = require('./speakApp.json');
 var wax = require("./wax");
-wax(app, application);
+wax(app);
 
 app.listen(3000);

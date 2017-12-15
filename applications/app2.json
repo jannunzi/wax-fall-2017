@@ -1,0 +1,211 @@
+{
+  "applicationName": "speakApp",
+  "connectionString": "localhost:27017",
+  "databaseName": "speak-app",
+  "scripts": {
+    "sayHello": {
+      "inputs": {},
+      "outputs": {},
+      "statements": [
+
+      ]
+    }
+  },
+  "pages": {
+    "page1": {
+      "route": "page123",
+      "widgets": [
+        {
+          "type": "html",
+          "html": "<p>Hello from app2</p>"
+        }
+      ]
+    },
+    "test": {
+      "route": "test",
+      "handlers": [
+        {
+          "name": "onClickMe",
+          "parameters": ["param1", "param2"],
+          "statements": [
+            "alert('hello')"
+          ]
+        },
+        {
+          "name": "onClickYou",
+          "statements": [
+            "alert('hello')"
+          ]
+        }
+      ],
+      "widgets": [
+        {
+          "type": "button",
+          "label": "Click Me",
+          "events": {
+            "click": {
+              "handler": {
+                "name": "onClickMe"
+              }
+            }
+          },
+          "script": [
+            {"statement": "alert('hello')"}
+          ]
+        },
+        {
+          "type": "list",
+          "name": "groceries",
+          "label": "Groceries",
+          "items": [
+            "Bread",
+            "Milk",
+            "Eggs"
+          ]
+        },
+        {
+          "type": "select",
+          "name": "color",
+          "label": "Color",
+          "options": [
+            {"label": "Yellow", "value": "YELLOW"},
+            {"label": "Blue", "value": "BLUE", "selected": true},
+            {"label": "Red", "value": "RED"}
+          ]
+        },
+        {
+          "type": "formatted",
+          "name": "post",
+          "label": "Post",
+          "placeholder": "A formatted blog post"
+        },
+        {
+          "type": "textarea",
+          "name": "description",
+          "label": "Description",
+          "placeholder": "Tell us something interesting about yourself"
+        },
+        {
+          "type": "input",
+          "name": "firstName",
+          "label": "First Name",
+          "placeholder": "Alice"
+        },
+        {
+          "type": "html",
+          "html": "<p>Hello</p>"
+        },
+        {
+          "type": "image",
+          "url": "/images/faces/5.jpeg",
+          "width": "100%"
+        },
+        {
+          "type": "heading",
+          "text": "Heading Widget",
+          "size": 1
+        },
+        {
+          "type": "heading",
+          "text": "Heading Widget",
+          "size": 2
+        },
+        {
+          "type": "heading",
+          "text": "Heading Widget",
+          "size": 3
+        },
+        {
+          "type": "heading",
+          "text": "Heading Widget",
+          "size": 4
+        }
+      ]
+    }
+  },
+  "entities": {
+    "movie": {
+      "default" : true,
+      "view": {
+        "fields": {
+          "name": {
+            "columns": "10",
+            "placeholder": "Alice",
+            "labels": {
+              "plural": {
+                "lowercase": "names",
+                "uppercase": "Names"
+              },
+              "singular": {
+                "lowercase": "name",
+                "uppercase": "Name"
+              }
+            }
+          },
+          "plot": {
+            "columns": "10",
+            "placeholder": "Alice",
+            "type": "formatted",
+            "labels": {
+              "plural": {
+                "lowercase": "plots",
+                "uppercase": "Plots"
+              },
+              "singular": {
+                "lowercase": "plot",
+                "uppercase": "Plot"
+              }
+            }
+          }
+        },
+        "labels": {
+          "plural": {
+            "lowercase": "movies",
+            "uppercase": "Movies"
+          },
+          "singular": {
+            "lowercase": "movie",
+            "uppercase": "Movie"
+          }
+        }
+      }
+    },
+    "institution": {
+      "view": {
+        "fields": {
+          "formatted": {
+            "type": "formatted"
+          },
+          "description": {
+            "type": "textarea",
+            "rows": 10
+          },
+          "name": {
+            "columns": "10",
+            "placeholder": "Alice",
+            "labels": {
+              "plural": {
+                "lowercase": "names",
+                "uppercase": "Names"
+              },
+              "singular": {
+                "lowercase": "name",
+                "uppercase": "Name"
+              }
+            }
+          }
+        },
+        "labels": {
+          "plural": {
+            "lowercase": "institutions",
+            "uppercase": "Institutions"
+          },
+          "singular": {
+            "lowercase": "institution",
+            "uppercase": "Institution"
+          }
+        }
+      }
+    }
+  }
+}
